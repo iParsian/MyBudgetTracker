@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Budget Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2v20M17 6.5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <div>
+            <h1>Budget</h1>
+            <p>Private dashboard</p>
+          </div>
+        </div>
+
+        <nav class="nav-tabs" aria-label="Dashboard views">
+          <button class="nav-tab active" data-view="dashboard" type="button"><span class="icon">D</span>Dashboard</button>
+          <button class="nav-tab" data-view="transactions" type="button"><span class="icon">+</span>Transactions</button>
+          <button class="nav-tab" data-view="budgets" type="button"><span class="icon">%</span>Budgets</button>
+          <button class="nav-tab" data-view="investments" type="button"><span class="icon">$</span>Investments</button>
+          <button class="nav-tab" data-view="annual" type="button"><span class="icon">Y</span>Annual</button>
+          <button class="nav-tab" data-view="ai" type="button"><span class="icon">AI</span>AI Report</button>
+          <button class="nav-tab" data-view="settings" type="button"><span class="icon">*</span>Settings</button>
+        </nav>
+
+        <div class="sync-card">
+          <span>Data file</span>
+          <strong id="savedStatus">Loading</strong>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Current month</p>
+            <h2 id="currentMonthTitle">Budget Dashboard</h2>
+          </div>
+          <div class="month-controls" hidden>
+            <button class="secondary-button" id="previousMonthButton" type="button">Previous</button>
+            <button class="secondary-button" id="currentMonthButton" type="button">Today</button>
+            <button class="secondary-button" id="nextMonthButton" type="button">Next</button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboardView">
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>Income</span>
+              <strong id="incomeTotal">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Expenses</span>
+              <strong id="expenseTotal">0</strong>
+            </article>
+            <article class="stat-card">
+              <span id="balanceLabel">Saving / loss</span>
+              <strong id="balanceTotal">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Savings rate</span>
+              <strong id="savingsRate">0%</strong>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel dashboard-widget" data-widget="ai_report">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Local intelligence</p>
+                  <h3>AI Financial Report</h3>
+                </div>
+              </div>
+              <div id="dashboardAiReport" class="ai-report-grid"></div>
+            </section>
+
+            <section class="panel dashboard-widget" data-widget="pie">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Monthly mix</p>
+                  <h3>Category pie</h3>
+                </div>
+              </div>
+              <div class="pie-layout">
+                <div class="pie-wrap">
+                  <canvas id="expensePie" width="680" height="560" aria-label="Category pie chart"></canvas>
+                  <div id="pieTooltip" class="chart-tooltip" hidden></div>
+                </div>
+                <div id="pieSummary" class="pie-summary"></div>
+              </div>
+            </section>
+
+            <section class="panel wide-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Trends</p>
+                  <h3>Income, expenses, and categories</h3>
+                </div>
+              </div>
+              <div class="dashboard-chart-grid">
+                <div class="mini-chart-panel">
+                  <div class="mini-chart-heading">
+                    <strong>Recent months</strong>
+                    <small>Income vs expenses</small>
+                  </div>
+                  <div id="dashboardTrendChart" class="dashboard-trend-chart"></div>
+                </div>
+                <div class="mini-chart-panel">
+                  <div class="mini-chart-heading">
+                    <strong>Top expenses</strong>
+                    <small>Current month</small>
+                  </div>
+                  <div id="dashboardCategoryChart" class="category-bar-chart"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel dashboard-widget" data-widget="budget">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Budget health</p>
+                  <h3>Monthly limits</h3>
+                </div>
+              </div>
+              <div id="budgetHealth" class="stack-list"></div>
+            </section>
+
+            <section class="panel wide-panel dashboard-widget" data-widget="recent">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Recent activity</p>
+                  <h3>Latest transactions</h3>
+                </div>
+              </div>
+              <div id="recentTransactions" class="transaction-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="transactionsView">
+          <div class="workspace-grid single-column">
+            <section class="panel table-panel">
+              <div class="panel-heading controls-heading">
+                <div>
+                  <p class="eyebrow">Ledger</p>
+                  <h3>Transactions</h3>
+                </div>
+                <div class="filters">
+                  <input id="searchInput" type="search" placeholder="Search">
+                  <select id="filterCategory"></select>
+                  <select id="filterType">
+                    <option value="">All types</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                  <button class="primary-button" id="tableAddTransactionButton" type="button">Add</button>
+                </div>
+              </div>
+              <div class="advanced-filters">
+                <label>From<input id="filterFromDate" type="date"></label>
+                <label>To<input id="filterToDate" type="date"></label>
+                <label>Min amount<input id="filterMinAmount" type="number" step="1" min="0"></label>
+                <label>Max amount<input id="filterMaxAmount" type="number" step="1" min="0"></label>
+                <button class="secondary-button" id="clearFiltersButton" type="button">Clear filters</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <colgroup>
+                    <col class="date-col">
+                    <col>
+                    <col>
+                    <col class="amount-col">
+                    <col class="action-col">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Description</th>
+                      <th>Category</th>
+                      <th class="money">Amount</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="transactionsTable"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="budgetsView">
+          <div class="budget-summary-grid">
+            <article class="stat-card">
+              <span>Planned</span>
+              <strong id="budgetPlanned">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Spent</span>
+              <strong id="budgetSpent">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Remaining</span>
+              <strong id="budgetRemaining">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Over budget</span>
+              <strong id="budgetOverCount">0</strong>
+            </article>
+          </div>
+
+          <div class="budget-page-grid">
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Category control</p>
+                  <h3>Budget usage</h3>
+                </div>
+                <button class="secondary-button" id="applyAiBudgetsButton" type="button">Apply AI budgets</button>
+              </div>
+              <div id="budgetTable" class="budget-table"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Attention</p>
+                  <h3>Closest limits</h3>
+                </div>
+              </div>
+              <div id="budgetWatchList" class="stack-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="annualView">
+          <section class="panel">
+            <div class="panel-heading controls-heading">
+              <div>
+                <p class="eyebrow">Annual financial dashboard</p>
+                <h3 id="annualTitle">Year summary</h3>
+              </div>
+              <div class="year-controls">
+                <button class="secondary-button" id="previousYearButton" type="button">Previous</button>
+                <button class="secondary-button" id="nextYearButton" type="button">Next</button>
+              </div>
+            </div>
+
+            <div id="annualChart" class="annual-chart"></div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Month</th>
+                    <th class="money">Income</th>
+                    <th class="money">Expenses</th>
+                    <th class="money">Savings</th>
+                  </tr>
+                </thead>
+                <tbody id="annualTable"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="investmentsView">
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>Portfolio value</span>
+              <strong id="investmentValue">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Cost basis</span>
+              <strong id="investmentCost">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Gain / loss</span>
+              <strong id="investmentGain">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Rate source</span>
+              <strong id="investmentRateStatus">Manual</strong>
+            </article>
+          </div>
+          <div class="workspace-grid">
+            <form class="panel form-panel asset-form" id="investmentForm">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Assets</p>
+                  <h3>Add investment</h3>
+                </div>
+              </div>
+              <input id="investmentName" type="text" placeholder="Asset name" required>
+              <select id="investmentType" required>
+                <option value="gold_18k_gram">Gold 18k gram</option>
+                <option value="coin_emami">Gold coin - Emami</option>
+                <option value="coin_bahar">Gold coin - Bahar</option>
+                <option value="coin_half">Half coin</option>
+                <option value="coin_quarter">Quarter coin</option>
+                <option value="coin_gram">Gram coin</option>
+                <option value="usd">US dollar</option>
+                <option value="eur">Euro</option>
+                <option value="try">Turkish lira</option>
+                <option value="btc">Bitcoin</option>
+                <option value="eth">Ethereum</option>
+                <option value="usdt">Tether</option>
+              </select>
+              <input id="investmentQuantity" type="number" step="0.0001" min="0" placeholder="Quantity" required>
+              <input id="investmentPurchasePrice" type="number" step="1" min="0" placeholder="Purchase price per unit">
+              <input id="investmentManualPrice" type="number" step="1" min="0" placeholder="Manual current price">
+              <label class="inline-check">
+                <input id="investmentUseMarketPrice" type="checkbox" checked>
+                <span>Use latest market price when available</span>
+              </label>
+              <button class="primary-button" type="submit">Add investment</button>
+            </form>
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Portfolio</p>
+                  <h3>Holdings</h3>
+                </div>
+                <div class="panel-actions">
+                  <button class="secondary-button" id="refreshRatesButton" type="button">Refresh rates</button>
+                  <button class="secondary-button" id="updateInvestmentPricesButton" type="button">Update stored prices</button>
+                </div>
+              </div>
+              <div id="investmentList" class="stack-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="aiView">
+          <section class="panel ai-report-hero">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Offline intelligence</p>
+                <h3>AI Financial Report</h3>
+              </div>
+            </div>
+            <p id="aiExecutiveSummary" class="report-summary-text"></p>
+          </section>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <span>Health score</span>
+              <strong id="aiConfidence">0%</strong>
+            </article>
+            <article class="stat-card">
+              <span>Projected net</span>
+              <strong id="aiMonthEnd">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Projected savings rate</span>
+              <strong id="aiSavingIdea">0</strong>
+            </article>
+            <article class="stat-card">
+              <span>Health label</span>
+              <strong id="aiRiskLevel">Low</strong>
+            </article>
+          </div>
+
+          <div class="workspace-grid">
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Report actions</p>
+                  <h3>What needs attention</h3>
+                </div>
+              </div>
+              <div id="aiSuggestions" class="ai-list"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Learning</p>
+                  <h3>Detected patterns</h3>
+                </div>
+              </div>
+              <div id="aiHabits" class="ai-list"></div>
+            </section>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Quality</p>
+                  <h3>Data checks</h3>
+                </div>
+              </div>
+              <div id="aiAutofillGuide" class="ai-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="settingsView">
+          <div class="workspace-grid">
+            <form class="panel form-panel" id="settingsForm">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Preferences</p>
+                  <h3>Dashboard settings</h3>
+                </div>
+              </div>
+              <label>Currency
+                <select id="currencyInput" required>
+                  <option value="IRR">IRR - Iranian rial</option>
+                  <option value="USD">USD - US dollar</option>
+                  <option value="EUR">EUR - Euro</option>
+                  <option value="TRY">TRY - Turkish lira</option>
+                </select>
+              </label>
+              <label>Calendar
+                <select id="calendarInput" required>
+                  <option value="english">English calendar</option>
+                  <option value="persian">Persian calendar</option>
+                </select>
+              </label>
+              <label>Language
+                <select id="languageInput" required>
+                  <option value="english">English</option>
+                  <option value="persian">Persian</option>
+                </select>
+              </label>
+              <label>Theme
+                <select id="themeInput" required>
+                  <option value="linen">Linen</option>
+                  <option value="sage">Sage</option>
+                  <option value="mist">Mist</option>
+                  <option value="pale-blue">Pale Blue</option>
+                  <option value="pale-pink">Pale Pink</option>
+                  <option value="pale-green">Pale Green</option>
+                </select>
+              </label>
+              <label>Living country
+                <select id="livingCountryInput">
+                  <option value="IR">Iran</option>
+                  <option value="TR">Turkey</option>
+                  <option value="US">United States</option>
+                  <option value="EU">Euro area</option>
+                </select>
+              </label>
+              <label>Inflation override %
+                <input id="inflationRateInput" type="number" min="0" max="300" step="0.1" placeholder="Auto country rate">
+              </label>
+              <label>Market rates provider
+                <select id="marketProviderInput">
+                  <option value="tgju">TGJU website</option>
+                  <option value="navasan">Navasan</option>
+                  <option value="brsapi">BRSAPI</option>
+                </select>
+                <input id="marketApiKeyInput" type="password" placeholder="Optional live rates key">
+              </label>
+              <button class="primary-button" type="submit">Save settings</button>
+            </form>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Category list</p>
+                  <h3>Manage budgets</h3>
+                </div>
+                <button class="primary-button" id="openCategoryFormButton" type="button">Add category</button>
+              </div>
+              <div id="settingsCategoryList" class="stack-list"></div>
+            </section>
+
+            <section class="panel form-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">CSV import</p>
+                  <h3>Import transactions</h3>
+                </div>
+              </div>
+              <label>CSV file<input id="importFileInput" type="file" accept=".csv,text/csv"></label>
+              <div class="import-map">
+                <label>Date column<select id="importDateColumn"></select></label>
+                <label>Description column<select id="importDescriptionColumn"></select></label>
+                <label>Amount column<select id="importAmountColumn"></select></label>
+                <label>Category column<select id="importCategoryColumn"></select></label>
+              </div>
+              <button class="primary-button" id="importTransactionsButton" type="button">Import selected rows</button>
+            </section>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Import preview</p>
+                  <h3>Mapped rows</h3>
+                </div>
+              </div>
+              <div id="importPreview" class="stack-list"></div>
+            </section>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Data safety</p>
+                  <h3>JSON file and backups</h3>
+                </div>
+              </div>
+              <label>Data JSON file
+                <div class="path-row">
+                  <input id="dataFileInput" type="text" placeholder="Choose a data file path">
+                  <button class="secondary-button" id="browseDataFileButton" type="button">Browse</button>
+                  <button class="primary-button" id="saveDataFileButton" type="button">Save path</button>
+                </div>
+              </label>
+              <div class="backup-row">
+                <div>
+                  <small>Backup folder</small>
+                  <strong id="backupFolderText">-</strong>
+                </div>
+                <div>
+                  <small>Backups</small>
+                  <strong id="backupCountText">0</strong>
+                </div>
+                <button class="secondary-button" id="backupNowButton" type="button">Backup now</button>
+              </div>
+              <div id="backupList" class="stack-list restore-list"></div>
+            </section>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Automation</p>
+                  <h3>Recurring transactions</h3>
+                </div>
+                <button class="secondary-button" id="applyRecurringButton" type="button">Apply due</button>
+              </div>
+              <form id="recurringForm" class="inline-form">
+                <input id="recurringDescription" type="text" placeholder="Description" required>
+                <select id="recurringCategory" required></select>
+                <input id="recurringAmount" type="number" step="1" min="0" placeholder="Amount" required>
+                <input id="recurringStartDate" type="date" required>
+                <input id="recurringDay" type="number" min="1" max="31" placeholder="Day" required>
+                <button class="primary-button" type="submit">Add</button>
+              </form>
+              <div id="recurringList" class="stack-list"></div>
+            </section>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Rules</p>
+                  <h3>Auto-categorize</h3>
+                </div>
+              </div>
+              <form id="ruleForm" class="inline-form">
+                <input id="ruleContains" type="text" placeholder="Description contains" required>
+                <select id="ruleCategory" required></select>
+                <button class="primary-button" type="submit">Add rule</button>
+              </form>
+              <div id="ruleList" class="stack-list"></div>
+            </section>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Targets</p>
+                  <h3>Monthly goals</h3>
+                </div>
+              </div>
+              <form id="goalForm" class="inline-form">
+                <input id="goalName" type="text" placeholder="Goal name" required>
+                <select id="goalType" required>
+                  <option value="savings_rate">Savings rate %</option>
+                  <option value="category_spend">Category spend limit</option>
+                </select>
+                <select id="goalCategory"></select>
+                <input id="goalTarget" type="number" step="1" min="0" placeholder="Target" required>
+                <button class="primary-button" type="submit">Add goal</button>
+              </form>
+              <div id="goalList" class="stack-list"></div>
+            </section>
+
+            <section class="panel table-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Dashboard</p>
+                  <h3>Visible widgets</h3>
+                </div>
+              </div>
+              <form id="widgetForm" class="widget-options">
+                <label><input type="checkbox" name="widget" value="pie"> Category pie</label>
+                <label><input type="checkbox" name="widget" value="ai_report"> AI report</label>
+                <label><input type="checkbox" name="widget" value="budget"> Budget health</label>
+                <label><input type="checkbox" name="widget" value="recent"> Recent transactions</label>
+                <button class="primary-button" type="submit">Save widgets</button>
+              </form>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="transactionModal" hidden>
+      <form class="modal-panel" id="transactionForm">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Transaction form</p>
+            <h3 id="transactionFormTitle">Add transaction</h3>
+          </div>
+          <button class="icon-button icon-only" id="closeTransactionFormButton" type="button" aria-label="Close">
+            <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <input type="hidden" id="transactionId">
+        <label>Date
+          <span class="date-mode" id="englishDateGroup">
+            <input id="dateInput" type="date">
+          </span>
+          <span class="persian-date-grid" id="persianDateGroup" hidden>
+            <input id="persianYearInput" type="number" inputmode="numeric" placeholder="Year">
+            <select id="persianMonthInput">
+              <option value="1">Farvardin</option>
+              <option value="2">Ordibehesht</option>
+              <option value="3">Khordad</option>
+              <option value="4">Tir</option>
+              <option value="5">Mordad</option>
+              <option value="6">Shahrivar</option>
+              <option value="7">Mehr</option>
+              <option value="8">Aban</option>
+              <option value="9">Azar</option>
+              <option value="10">Dey</option>
+              <option value="11">Bahman</option>
+              <option value="12">Esfand</option>
+            </select>
+            <input id="persianDayInput" type="number" inputmode="numeric" min="1" max="31" placeholder="Day">
+          </span>
+        </label>
+        <label>Time <span class="optional-label">Optional</span><input id="timeInput" type="time"></label>
+        <label>Description<input id="descriptionInput" type="text" placeholder="Salary, groceries, rent" required></label>
+        <div id="transactionAiHint" class="ai-entry-hint" hidden></div>
+        <label>Category<select id="categoryInput" required></select></label>
+        <label>Amount<input id="amountInput" type="number" step="1" min="0" placeholder="Amount" required></label>
+        <div class="form-actions">
+          <button class="secondary-button" id="clearFormButton" type="button">Clear</button>
+          <button class="primary-button" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-backdrop" id="categoryModal" hidden>
+      <form class="modal-panel" id="categoryForm">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Category form</p>
+            <h3 id="categoryFormTitle">Add category</h3>
+          </div>
+          <button class="icon-button icon-only" id="closeCategoryFormButton" type="button" aria-label="Close">
+            <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <label>Category<input id="newCategoryInput" type="text" placeholder="Food, Rent, Travel" required></label>
+        <label>Type
+          <select id="categoryTypeInput" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </label>
+        <label>Monthly budget<input id="budgetInput" type="number" step="1" min="0" placeholder="0"></label>
+        <div class="form-actions">
+          <button class="secondary-button" id="clearCategoryFormButton" type="button">Clear</button>
+          <button class="primary-button" type="submit">Save category</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
