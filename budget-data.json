@@ -1,121 +1,76 @@
 {
   "currency": "IRR",
-  "calendar": "persian",
+  "calendar": "english",
   "language": "english",
   "theme": "sage",
   "dashboard_widgets": [
     "pie",
+    "ai_report",
     "budget",
     "recent"
   ],
-  "living_country": "IR",
+  "living_country": "",
   "inflation_rate": 0,
   "categories": [
-    {
-      "name": "Education",
-      "budget": 401302000.0,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 401302000.0,
-        "optimum_budget": 328338000.0,
-        "baseline_spend": 364820000.0,
-        "confidence": 0.52,
-        "generated_at": "2026-05-30T21:41:49"
-      }
-    },
-    {
-      "name": "Entertainment",
-      "budget": 38335220.0,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 38335220.0,
-        "optimum_budget": 31365180.0,
-        "baseline_spend": 34850200.0,
-        "confidence": 0.52,
-        "generated_at": "2026-05-30T21:41:49"
-      }
-    },
-    {
-      "name": "Food",
-      "budget": 6473500.0,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 6473500.0,
-        "optimum_budget": 5296500.0,
-        "baseline_spend": 5885000.0,
-        "confidence": 0.52,
-        "generated_at": "2026-05-30T21:41:49"
-      }
-    },
-    {
-      "name": "Health",
-      "budget": 362395.0,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 362395.0,
-        "optimum_budget": 296505.0,
-        "baseline_spend": 329450.0,
-        "confidence": 0.52,
-        "generated_at": "2026-05-30T21:41:49"
-      }
-    },
-    {
-      "name": "Miscellaneous",
-      "budget": 1070155617.3,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 1070155617.3,
-        "optimum_budget": 875581868.7,
-        "baseline_spend": 972868743.0,
-        "confidence": 0.64,
-        "generated_at": "2026-05-30T21:41:49"
-      }
-    },
-    {
-      "name": "Girlfriend Expenses",
-      "budget": 120706300.0,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 120706300.0,
-        "optimum_budget": 98759700.0,
-        "baseline_spend": 109733000.0,
-        "confidence": 0.52,
-        "generated_at": "2026-05-30T21:41:49"
-      }
-    },
-    {
-      "name": "Rent",
-      "budget": 0,
-      "type": "income"
-    },
     {
       "name": "Salary",
       "budget": 0,
       "type": "income"
     },
     {
-      "name": "Sport",
-      "budget": 100100000.0,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 100100000.0,
-        "optimum_budget": 81900000.0,
-        "baseline_spend": 91000000.0,
-        "confidence": 0.52,
-        "generated_at": "2026-05-30T21:41:49"
-      }
+      "name": "Other Incomes",
+      "budget": 0,
+      "type": "income"
+    },
+    {
+      "name": "Savings",
+      "budget": 0,
+      "type": "income"
+    },
+    {
+      "name": "Rent",
+      "budget": 0,
+      "type": "expense"
+    },
+    {
+      "name": "Groceries",
+      "budget": 0,
+      "type": "expense"
+    },
+    {
+      "name": "Food",
+      "budget": 0,
+      "type": "expense"
     },
     {
       "name": "Transport",
-      "budget": 6359100.0,
-      "type": "expense",
-      "ai_budget": {
-        "target_budget": 6359100.0,
-        "optimum_budget": 5202900.0,
-        "baseline_spend": 5781000.0,
-        "confidence": 0.64,
-        "generated_at": "2026-05-30T21:41:49"
-      }
+      "budget": 0,
+      "type": "expense"
+    },
+    {
+      "name": "Utilities",
+      "budget": 0,
+      "type": "expense"
+    },
+    {
+      "name": "Health",
+      "budget": 0,
+      "type": "expense"
+    },
+    {
+      "name": "Education",
+      "budget": 0,
+      "type": "expense"
+    },
+    {
+      "name": "Entertainment",
+      "budget": 0,
+      "type": "expense"
+    },
+    {
+      "name": "Sport",
+      "budget": 0,
+      "type": "expense"
     },
     {
       "name": "Travel",
@@ -123,527 +78,57 @@
       "type": "expense"
     },
     {
-      "name": "Utilities",
-      "budget": 40000000.0,
-      "type": "expense"
-    },
-    {
-      "name": "Groceries",
-      "budget": 50000000.0,
-      "type": "expense"
-    },
-    {
       "name": "Computer",
-      "budget": 50000000.0,
+      "budget": 0,
       "type": "expense"
     },
     {
-      "name": "Other Incomes",
+      "name": "Miscellaneous",
       "budget": 0,
-      "type": "income"
+      "type": "expense"
     }
   ],
-  "transactions": [
-    {
-      "id": "t-001",
-      "date": "2026-05-30",
-      "description": "Salary",
-      "category": "Salary",
-      "amount": 1324000000
-    },
-    {
-      "id": "t-002",
-      "date": "2026-05-30",
-      "description": "Fast Food",
-      "category": "Girlfriend Expenses",
-      "amount": -6959000
-    },
-    {
-      "id": "t-003",
-      "date": "2026-05-30",
-      "description": "Tennis",
-      "category": "Sport",
-      "amount": -90000000
-    },
-    {
-      "id": "t-004",
-      "date": "2026-05-30",
-      "description": "Tehran Data Debt",
-      "category": "Education",
-      "amount": -164100000
-    },
-    {
-      "id": "t-005",
-      "date": "2026-05-30",
-      "description": "Vape",
-      "category": "Miscellaneous",
-      "amount": -24000000.0,
-      "ai": {
-        "suggested_category": "Miscellaneous",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-006",
-      "date": "2026-05-30",
-      "description": "Snap Pay",
-      "category": "Girlfriend Expenses",
-      "amount": -15000000
-    },
-    {
-      "id": "t-d41f349919",
-      "date": "2026-05-30",
-      "description": "VPN for Mom",
-      "category": "Computer",
-      "amount": -3953820.0
-    },
-    {
-      "id": "t-b4c50bc378",
-      "date": "2026-05-30",
-      "description": "House rent",
-      "category": "Rent",
-      "amount": 25000000.0
-    },
-    {
-      "id": "t-25775c2f46",
-      "date": "2026-05-30",
-      "description": "Ice Coffee",
-      "category": "Food",
-      "amount": -5885000.0,
-      "ai": {
-        "suggested_category": "Food",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-94e9ba04ae",
-      "date": "2026-04-23",
-      "description": "Salary",
-      "category": "Salary",
-      "amount": 2125515040.0,
-      "ai": {
-        "suggested_category": "Salary",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-2b19bbc607",
-      "date": "2026-05-22",
-      "description": "House Rent",
-      "category": "Rent",
-      "amount": 100000000.0,
-      "ai": {
-        "suggested_category": "Rent",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-9646329f42",
-      "date": "2026-05-18",
-      "description": "Negin Payment",
-      "category": "Other Incomes",
-      "amount": 30000000.0,
-      "ai": {
-        "suggested_category": "Other Incomes",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-9d2cfd1393",
-      "date": "2026-05-18",
-      "description": "Negin Payment",
-      "category": "Other Incomes",
-      "amount": 30000000.0,
-      "ai": {
-        "suggested_category": "Other Incomes",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-2e41e2f31a",
-      "date": "2026-05-17",
-      "description": "Teaching Payment",
-      "category": "Other Incomes",
-      "amount": 50000000.0,
-      "ai": {
-        "suggested_category": "Other Incomes",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-286f75e300",
-      "date": "2026-05-14",
-      "description": "Debts",
-      "category": "Other Incomes",
-      "amount": 15000000.0,
-      "ai": {
-        "suggested_category": "Other Incomes",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-1b2d6a7c06",
-      "date": "2026-05-12",
-      "description": "Pooneh Payment",
-      "category": "Other Incomes",
-      "amount": 8700000.0,
-      "ai": {
-        "suggested_category": "Other Incomes",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-266411af92",
-      "date": "2026-05-11",
-      "description": "Debt Payment",
-      "category": "Other Incomes",
-      "amount": 8700000.0,
-      "ai": {
-        "suggested_category": "Other Incomes",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-04a4e6f53a",
-      "date": "2026-05-02",
-      "description": "Mom Debt",
-      "category": "Other Incomes",
-      "amount": 10000000.0,
-      "ai": {
-        "suggested_category": "Other Incomes",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-b15e6531e6",
-      "date": "2026-05-05",
-      "description": "Fuel and Car Services",
-      "category": "Transport",
-      "amount": -1002000.0,
-      "ai": {
-        "suggested_category": "Transport",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-10c32c3ef2",
-      "date": "2026-05-11",
-      "description": "Doctor's Appointment",
-      "category": "Health",
-      "amount": -329450.0,
-      "ai": {
-        "suggested_category": "Health",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-0848ecbb74",
-      "date": "2026-05-07",
-      "description": "Medicine",
-      "category": "Education",
-      "amount": -1220000.0,
-      "ai": {
-        "suggested_category": "Education",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-4c094ad123",
-      "date": "2026-04-25",
-      "description": "Post",
-      "category": "Transport",
-      "amount": -10560000.0,
-      "ai": {
-        "suggested_category": "Transport",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-90d6d33fb2",
-      "date": "2026-04-27",
-      "description": "Dry Cleaning",
-      "category": "Miscellaneous",
-      "amount": -14000000.0,
-      "ai": {
-        "suggested_category": "Miscellaneous",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-61b331b149",
-      "date": "2026-05-20",
-      "description": "Field rent",
-      "category": "Sport",
-      "amount": -1000000.0,
-      "ai": {
-        "suggested_category": "Sport",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-e9b50fea9a",
-      "date": "2026-04-24",
-      "description": "Hotel",
-      "category": "Entertainment",
-      "amount": -34850200.0,
-      "ai": {
-        "suggested_category": "Entertainment",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-077c89d3ec",
-      "date": "2026-04-25",
-      "description": "Bills",
-      "category": "Utilities",
-      "amount": -1087000.0,
-      "ai": {
-        "suggested_category": "Utilities",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-afc6c5dbc3",
-      "date": "2026-04-25",
-      "description": "Bills",
-      "category": "Utilities",
-      "amount": -5633000.0,
-      "ai": {
-        "suggested_category": "Utilities",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-0298e44d4d",
-      "date": "2026-05-14",
-      "description": "Bills",
-      "category": "Utilities",
-      "amount": -9735000.0,
-      "ai": {
-        "suggested_category": "Utilities",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-3a09f8e23c",
-      "date": "2026-05-14",
-      "description": "Bills",
-      "category": "Utilities",
-      "amount": -32763000.0,
-      "ai": {
-        "suggested_category": "Utilities",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-5787f39d6f",
-      "date": "2026-05-18",
-      "description": "Power Bill",
-      "category": "Girlfriend Expenses",
-      "amount": -64215000.0,
-      "ai": {
-        "suggested_category": "Girlfriend Expenses",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-72e8a4d78b",
-      "date": "2026-05-05",
-      "description": "Supermarket",
-      "category": "Groceries",
-      "amount": -124122450.0,
-      "ai": {
-        "suggested_category": "Groceries",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-2acdf298db",
-      "date": "2026-05-22",
-      "description": "Transfer to Others",
-      "category": "Miscellaneous",
-      "amount": -13700000.0,
-      "ai": {
-        "suggested_category": "Miscellaneous",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-8ac3ec7625",
-      "date": "2026-05-15",
-      "description": "Transfer to Others",
-      "category": "Miscellaneous",
-      "amount": -1501210750.0,
-      "ai": {
-        "suggested_category": "Miscellaneous",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-ed28b3d0d7",
-      "date": "2026-05-22",
-      "description": "Other Payments",
-      "category": "Miscellaneous",
-      "amount": -18009000.0,
-      "ai": {
-        "suggested_category": "Miscellaneous",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-166ec0a901",
-      "date": "2026-05-10",
-      "description": "Other Payments",
-      "category": "Miscellaneous",
-      "amount": -374817736.0,
-      "ai": {
-        "suggested_category": "Miscellaneous",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-2db4c927bf",
-      "date": "2026-05-12",
-      "description": "Tehran Data",
-      "category": "Education",
-      "amount": -199500000.0,
-      "ai": {
-        "suggested_category": "Education",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-70ff086ac0",
-      "date": "2026-05-31",
-      "description": "Snap Pay",
-      "category": "Girlfriend Expenses",
-      "amount": -13559000.0,
-      "ai": {
-        "suggested_category": "Girlfriend Expenses",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    },
-    {
-      "id": "t-d5c4d3399b",
-      "date": "2026-05-31",
-      "description": "Help",
-      "category": "Girlfriend Expenses",
-      "amount": -10000000.0,
-      "ai": {
-        "suggested_category": "Girlfriend Expenses",
-        "confidence": 0.995,
-        "method": "user_input",
-        "reason": "Category provided by user."
-      }
-    }
-  ],
-  "recurring_transactions": [
-    {
-      "id": "rt-5189429ac0",
-      "description": "House Rent",
-      "category": "Rent",
-      "amount": 190000000.0,
-      "frequency": "monthly",
-      "start_date": "2026-06-06",
-      "day": 10,
-      "active": true
-    }
-  ],
+  "transactions": [],
+  "recurring_transactions": [],
   "category_rules": [
     {
-      "id": "rule-850a82b348",
-      "contains": "Fastfood",
-      "category": "Food"
+      "id": "rule-salary",
+      "contains": "salary",
+      "category": "Salary"
     },
     {
-      "id": "rule-5a3254f9a6",
-      "contains": "Subscription",
-      "category": "Computer"
+      "id": "rule-grocery",
+      "contains": "supermarket",
+      "category": "Groceries"
+    },
+    {
+      "id": "rule-taxi",
+      "contains": "taxi",
+      "category": "Transport"
+    },
+    {
+      "id": "rule-fuel",
+      "contains": "fuel",
+      "category": "Transport"
+    },
+    {
+      "id": "rule-rent",
+      "contains": "rent",
+      "category": "Rent"
     }
   ],
   "goals": [
     {
-      "id": "goal-71f57e9b90",
-      "name": "Get More Dollars",
+      "id": "goal-save-20",
+      "name": "Save 20%",
       "type": "savings_rate",
-      "category": "Salary",
+      "category": "",
       "target": 20.0
     }
   ],
-  "investments": [
-    {
-      "id": "inv-d25003fcfd",
-      "name": "My Dollars",
-      "asset_type": "usd",
-      "symbol": "usd_sell",
-      "quantity": 9800.0,
-      "purchase_price": 0.0,
-      "manual_price": 1704000.0,
-      "notes": ""
-    }
-  ],
+  "investments": [],
   "market_provider": {
-    "name": "tgju",
+    "name": "",
     "api_key": "",
     "price_unit": "rial"
   }
