@@ -1,6 +1,8 @@
 # Budget Dashboard
 
-A small Python desktop budget app for tracking personal income, expenses, and monthly category budgets.
+CashPilot AI is a private, offline-first personal finance dashboard that combines budgeting, transaction tracking, smart categorisation, financial forecasting, and local AI coaching in one clean desktop-style app.
+
+It helps users understand where their income goes, detect risky spending patterns, forecast month-end savings, manage budgets, and add transactions using natural language — all while keeping financial data stored locally in a JSON file.
 
 ## Run
 
