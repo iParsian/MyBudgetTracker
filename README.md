@@ -5,7 +5,7 @@ A small Python desktop budget app for tracking personal income, expenses, and mo
 ## Run
 
 ```powershell
-python app.py
+python CashPilot AI.py
 ```
 
 This starts the local Python server and opens the dashboard in a desktop-style app window.
@@ -13,7 +13,7 @@ This starts the local Python server and opens the dashboard in a desktop-style a
 To run only the web server:
 
 ```powershell
-python app.py --server
+python CashPilot AI.py --server
 ```
 
 The app saves automatically to `budget-data.json`.
